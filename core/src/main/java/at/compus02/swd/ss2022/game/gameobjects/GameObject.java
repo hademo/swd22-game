@@ -3,6 +3,7 @@ package at.compus02.swd.ss2022.game.gameobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -12,6 +13,7 @@ import at.compus02.swd.ss2022.game.observers.position.PositionSubject;
 
 public abstract class GameObject implements PositionSubject {
     private Sprite sprite;
+    private ParticleEffect particleEffect;
 
     // Observers
     protected final List<PositionObserver> positionObservers = new ArrayList<>();
@@ -29,6 +31,9 @@ public abstract class GameObject implements PositionSubject {
 
     public void draw(SpriteBatch batch) {
         if (sprite != null) {
+            if (particleEffect != null) {
+                particleEffect.draw(batch);
+            }
             sprite.draw(batch);
         } else {
             System.out.println("GameObject Sprite is not set");
@@ -41,6 +46,14 @@ public abstract class GameObject implements PositionSubject {
 
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
+    }
+
+    public ParticleEffect getParticleEffect() {
+        return this.particleEffect;
+    }
+
+    public void setParticleEffect(ParticleEffect particleEffect) {
+        this.particleEffect = particleEffect;
     }
 
     @Override

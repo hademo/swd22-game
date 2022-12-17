@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Input.Keys;
 
+import at.compus02.swd.ss2022.game.commands.BerserkerModeCommand;
 import at.compus02.swd.ss2022.game.commands.FireProjectileCommand;
 import at.compus02.swd.ss2022.game.commands.MoveDownCommand;
 import at.compus02.swd.ss2022.game.commands.MoveLeftCommand;
@@ -19,6 +20,7 @@ public class GameInput extends InputAdapter {
     private MoveLeftCommand moveLeftCommand;
     private MoveRightCommand moveRightCommand;
     private FireProjectileCommand fireProjectileCommand;
+    private BerserkerModeCommand berserkerModeCommand;
     private List<Integer> keysPressed;
 
     public GameInput(Player player) {
@@ -27,6 +29,7 @@ public class GameInput extends InputAdapter {
         this.moveLeftCommand = new MoveLeftCommand(player);
         this.moveRightCommand = new MoveRightCommand(player);
         this.fireProjectileCommand = new FireProjectileCommand(player);
+        this.berserkerModeCommand = new BerserkerModeCommand(player);
         this.keysPressed = new ArrayList<>();
     }
 
@@ -47,6 +50,9 @@ public class GameInput extends InputAdapter {
                     this.moveRightCommand.execute();
                     break;
                 case Keys.SPACE:
+                    this.berserkerModeCommand.execute();
+                    break;
+                case Keys.ENTER:
                     this.fireProjectileCommand.execute();
                     break;
                 default:
