@@ -46,7 +46,7 @@ public abstract class MovingGameObject extends GameObject {
     @Override
     public void notifyObservers() {
         for (PositionObserver observer : positionObservers) {
-            observer.update(getSprite().getX(), getSprite().getY(), getMoveDirection());
+            observer.update(getX(), getY(), getMoveDirection());
         }
     }
 
@@ -55,16 +55,16 @@ public abstract class MovingGameObject extends GameObject {
         float movement = delta * movementSpeedMultiplier;
         switch (this.moveDirection) {
             case UP:
-                this.setPosition(this.getSprite().getX(), this.getSprite().getY() + movement);
+                this.setPosition(getX(), getY() + movement);
                 break;
             case DOWN:
-                this.setPosition(this.getSprite().getX(), this.getSprite().getY() - movement);
+                this.setPosition(getX(), getY() - movement);
                 break;
             case LEFT:
-                this.setPosition(this.getSprite().getX() - movement, this.getSprite().getY());
+                this.setPosition(getX() - movement, getY());
                 break;
             case RIGHT:
-                this.setPosition(this.getSprite().getX() + movement, this.getSprite().getY());
+                this.setPosition(getX() + movement, getY());
                 break;
             case NONE:
                 break;

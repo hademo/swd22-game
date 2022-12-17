@@ -12,6 +12,6 @@ public class Enemy extends MovingGameObject {
         super();
         Texture texture = AssetRepository.getInstance().getTexture(TextureType.PLAYER);
         setSprite(new Sprite(texture));
-        getSprite().setColor(Color.RED.cpy());
+        setColor(Color.RED.cpy());
     }
 }

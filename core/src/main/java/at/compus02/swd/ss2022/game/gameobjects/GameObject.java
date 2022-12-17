@@ -3,6 +3,7 @@ package at.compus02.swd.ss2022.game.gameobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -35,12 +36,28 @@ public abstract class GameObject implements PositionSubject {
         }
     }
 
+    public float getX() {
+        return sprite.getX();
+    }
+
+    public float getY() {
+        return sprite.getY();
+    }
+
     public Sprite getSprite() {
         return sprite;
     }
 
     public void setSprite(Sprite sprite) {
         this.sprite = sprite;
+    }
+
+    public void setColor(Color color) {
+        sprite.setColor(color);
+    }
+
+    public void setColor(float r, float g, float b, float a) {
+        sprite.setColor(r, g, b, a);
     }
 
     @Override
@@ -62,6 +79,6 @@ public abstract class GameObject implements PositionSubject {
     }
 
     private void notifyObserver(PositionObserver observer) {
-        observer.update(getSprite().getX(), getSprite().getY(), MoveDirection.NONE);
+        observer.update(getX(), getY(), MoveDirection.NONE);
     }
 }

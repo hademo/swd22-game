@@ -26,7 +26,7 @@ public class FireProjectileCommand implements Command {
             }
         }
         this.activeProjectile = ProjectileFactory.getInstance().create(GameObjectType.PROJECTILE);
-        this.activeProjectile.setPosition(this.player.getSprite().getX(), this.player.getSprite().getY());
+        this.activeProjectile.setPosition(this.player.getX(), this.player.getY());
         this.activeProjectile.setMoveDirection(direction);
     }
 

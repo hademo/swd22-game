@@ -61,5 +61,4 @@ public class TileFactory implements GameObjectFactory<Tile> {
         Tile[] objectArray = new Tile[objects.size()];
         return objects.toArray(objectArray);
     }
-
 }
