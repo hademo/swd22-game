@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import at.compus02.swd.ss2022.game.gameobjects.MovingGameObject.MoveDirection;
+import at.compus02.swd.ss2022.game.gameobjects.factories.GameObjectFactory.GameObjectType;
 import at.compus02.swd.ss2022.game.observers.position.PositionObserver;
 import at.compus02.swd.ss2022.game.observers.position.PositionSubject;
 
@@ -15,10 +16,11 @@ public abstract class GameObject implements PositionSubject {
     private Sprite sprite;
     private ParticleEffect particleEffect;
 
-    // Observers
     protected final List<PositionObserver> positionObservers = new ArrayList<>();
 
     public abstract void act(float delta);
+
+    public abstract GameObjectType getGameObjectType();
 
     public void setPosition(float x, float y) {
         if (sprite != null) {

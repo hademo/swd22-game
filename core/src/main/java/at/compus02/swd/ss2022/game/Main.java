@@ -11,6 +11,7 @@ import at.compus02.swd.ss2022.game.gameobjects.factories.ProjectileFactory;
 import at.compus02.swd.ss2022.game.gameobjects.factories.TileFactory;
 import at.compus02.swd.ss2022.game.gameobjects.factories.GameObjectFactory.GameObjectType;
 import at.compus02.swd.ss2022.game.input.GameInput;
+import at.compus02.swd.ss2022.game.map.Map;
 import at.compus02.swd.ss2022.game.observers.position.EnemyPositionObserver;
 import at.compus02.swd.ss2022.game.observers.position.PlayerPositionObserver;
 import at.compus02.swd.ss2022.logger.ConsoleLogger;
@@ -75,8 +76,9 @@ public class Main extends ApplicationAdapter {
 						|| x <= minWidth + Tile.WIDTH || x >= maxWidth - Tile.WIDTH * 2) {
 					type = GameObjectFactory.GameObjectType.TILE_GRAVEL;
 				}
-				GameObject tile = TileFactory.getInstance().create(type);
+				Tile tile = TileFactory.getInstance().create(type);
 				tile.setPosition(x, y);
+				Map.getInstance().addTile(tile);
 			}
 		}
 
@@ -113,7 +115,7 @@ public class Main extends ApplicationAdapter {
 
 	private Array<GameObject> getGameObjects() {
 		Array<GameObject> gameObjects = new Array<>();
-		gameObjects.addAll(TileFactory.getInstance().getObjects());
+		gameObjects.addAll(Map.getInstance().getObjects());
 		gameObjects.addAll(PlayerFactory.getInstance().getObjects());
 		gameObjects.addAll(ProjectileFactory.getInstance().getObjects());
 		gameObjects.addAll(EnemyFactory.getInstance().getObjects());
