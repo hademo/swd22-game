@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.compus02.swd.ss2022.game.gameobjects.Enemy;
-import at.compus02.swd.ss2022.game.movement.RandomMovementStrategy;
 
 public class EnemyFactory implements GameObjectFactory<Enemy> {
     private static EnemyFactory instance;
@@ -27,7 +26,7 @@ public class EnemyFactory implements GameObjectFactory<Enemy> {
 
         switch (type) {
             case ENEMY:
-                enemy = new Enemy(new RandomMovementStrategy());
+                enemy = new Enemy();
                 break;
             default:
                 System.out.println("Unknown GameObjectType");

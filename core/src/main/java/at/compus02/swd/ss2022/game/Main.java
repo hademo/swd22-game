@@ -12,6 +12,8 @@ import at.compus02.swd.ss2022.game.gameobjects.factories.TileFactory;
 import at.compus02.swd.ss2022.game.gameobjects.factories.GameObjectFactory.GameObjectType;
 import at.compus02.swd.ss2022.game.input.GameInput;
 import at.compus02.swd.ss2022.game.map.Map;
+import at.compus02.swd.ss2022.game.movement.FollowPlayerMovementStrategy;
+import at.compus02.swd.ss2022.game.movement.RandomMovementStrategy;
 import at.compus02.swd.ss2022.game.observers.position.EnemyPositionObserver;
 import at.compus02.swd.ss2022.game.observers.position.PlayerPositionObserver;
 import at.compus02.swd.ss2022.logger.ConsoleLogger;
@@ -87,9 +89,11 @@ public class Main extends ApplicationAdapter {
 
 		Enemy enemy = EnemyFactory.getInstance().create(GameObjectFactory.GameObjectType.ENEMY);
 		enemy.setPosition(100, 80);
+		enemy.setMovementStrategy(new FollowPlayerMovementStrategy(player));
 
-		EnemyFactory.getInstance().create(GameObjectFactory.GameObjectType.ENEMY)
-				.setPosition(100, -80);
+		Enemy enemy2 = EnemyFactory.getInstance().create(GameObjectFactory.GameObjectType.ENEMY);
+		enemy2.setPosition(100, -80);
+		enemy2.setMovementStrategy(new RandomMovementStrategy());
 
 		Gdx.input.setInputProcessor(new GameInput(player));
 	}

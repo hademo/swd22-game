@@ -9,18 +9,19 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import at.compus02.swd.ss2022.game.gameobjects.factories.GameObjectFactory.GameObjectType;
 import at.compus02.swd.ss2022.game.map.Map;
 import at.compus02.swd.ss2022.game.movement.MovementStrategy;
+import at.compus02.swd.ss2022.game.movement.NullMovementStrategy;
 import at.compus02.swd.ss2022.repository.AssetRepository;
 import at.compus02.swd.ss2022.repository.AssetRepository.TextureType;
 
 public class Enemy extends MovingGameObject {
     private MovementStrategy movementStrategy;
 
-    public Enemy(MovementStrategy movementStrategy) {
+    public Enemy() {
         super();
         Texture texture = AssetRepository.getInstance().getTexture(TextureType.PLAYER);
         setSprite(new Sprite(texture));
         setColor(Color.RED.cpy());
-        this.movementStrategy = movementStrategy;
+        this.movementStrategy = new NullMovementStrategy();
     }
 
     @Override
@@ -44,5 +45,9 @@ public class Enemy extends MovingGameObject {
     public void act(float delta) {
         super.act(delta);
         this.movementStrategy.act(this, delta);
+    }
+
+    public void setMovementStrategy(MovementStrategy movementStrategy) {
+        this.movementStrategy = movementStrategy;
     }
 }

@@ -13,7 +13,7 @@ public class RandomMovementStrategy implements MovementStrategy {
 
         gameObject.setPosition(gameObject.getX() + deltaX, gameObject.getY() + deltaY);
 
-        if (deltaAccumulator > 0.5f) {
+        if (deltaAccumulator > 1.0f) {
             deltaX = randomNumber();
             deltaY = randomNumber();
             deltaAccumulator = 0.0f;
