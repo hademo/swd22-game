@@ -69,5 +69,9 @@ public abstract class MovingGameObject extends GameObject {
             case NONE:
                 break;
         }
+        if (this.getParticleEffect() != null) {
+            this.getParticleEffect().setPosition(this.getSprite().getX(), this.getSprite().getY());
+            this.getParticleEffect().update(delta);
+        }
     }
 }

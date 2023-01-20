@@ -4,20 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import at.compus02.swd.ss2022.game.gameobjects.MovingGameObject.MoveDirection;
+import at.compus02.swd.ss2022.game.gameobjects.factories.GameObjectFactory.GameObjectType;
 import at.compus02.swd.ss2022.game.observers.position.PositionObserver;
 import at.compus02.swd.ss2022.game.observers.position.PositionSubject;
 
 public abstract class GameObject implements PositionSubject {
     private Sprite sprite;
+    private ParticleEffect particleEffect;
 
-    // Observers
     protected final List<PositionObserver> positionObservers = new ArrayList<>();
 
     public abstract void act(float delta);
+
+    public abstract GameObjectType getGameObjectType();
 
     public void setPosition(float x, float y) {
         if (sprite != null) {
@@ -30,6 +34,9 @@ public abstract class GameObject implements PositionSubject {
 
     public void draw(SpriteBatch batch) {
         if (sprite != null) {
+            if (particleEffect != null) {
+                particleEffect.draw(batch);
+            }
             sprite.draw(batch);
         } else {
             System.out.println("GameObject Sprite is not set");
@@ -56,8 +63,12 @@ public abstract class GameObject implements PositionSubject {
         sprite.setColor(color);
     }
 
-    public void setColor(float r, float g, float b, float a) {
-        sprite.setColor(r, g, b, a);
+    public ParticleEffect getParticleEffect() {
+        return this.particleEffect;
+    }
+
+    public void setParticleEffect(ParticleEffect particleEffect) {
+        this.particleEffect = particleEffect;
     }
 
     @Override
