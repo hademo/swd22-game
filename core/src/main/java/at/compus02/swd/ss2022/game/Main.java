@@ -83,10 +83,13 @@ public class Main extends ApplicationAdapter {
 		}
 
 		Player player = PlayerFactory.getInstance().create(GameObjectFactory.GameObjectType.PLAYER);
-		player.setPosition(0, 0);
+		player.setPosition(10, 10);
 
 		Enemy enemy = EnemyFactory.getInstance().create(GameObjectFactory.GameObjectType.ENEMY);
-		enemy.setPosition(100, 0);
+		enemy.setPosition(100, 80);
+
+		EnemyFactory.getInstance().create(GameObjectFactory.GameObjectType.ENEMY)
+				.setPosition(100, -80);
 
 		Gdx.input.setInputProcessor(new GameInput(player));
 	}
