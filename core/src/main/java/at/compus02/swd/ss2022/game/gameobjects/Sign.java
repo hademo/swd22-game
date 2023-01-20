@@ -2,28 +2,19 @@ package at.compus02.swd.ss2022.game.gameobjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Sign implements GameObject {
-    private Texture image;
-    private Sprite sprite;
+import at.compus02.swd.ss2022.repository.AssetRepository;
+import at.compus02.swd.ss2022.repository.AssetRepository.TextureType;
 
+public class Sign extends GameObject {
     public Sign() {
-        image = new Texture("sign.png");
-        sprite = new Sprite(image);
+        Texture texture = AssetRepository.getInstance().getTexture(TextureType.SIGN);
+        setSprite(new Sprite(texture));
     }
+
     @Override
     public void act(float delta) {
 
     }
 
-    @Override
-    public void setPosition(float x, float y) {
-        sprite.setPosition(x, y);
-    }
-
-    @Override
-    public void draw(SpriteBatch batch) {
-        sprite.draw(batch);
-    }
 }
