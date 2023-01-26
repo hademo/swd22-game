@@ -3,6 +3,7 @@ package at.compus02.swd.ss2022.game.gameobjects.factories;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.compus02.swd.ss2022.game.enemy.EnemyManager;
 import at.compus02.swd.ss2022.game.gameobjects.Enemy;
 
 public class EnemyFactory implements GameObjectFactory<Enemy> {
@@ -34,6 +35,7 @@ public class EnemyFactory implements GameObjectFactory<Enemy> {
         }
 
         objects.add(enemy);
+        EnemyManager.getInstance().add(enemy);
 
         return enemy;
     }
@@ -49,4 +51,8 @@ public class EnemyFactory implements GameObjectFactory<Enemy> {
         return objects.toArray(objectArray);
     }
 
+    public boolean remove(Enemy enemy) {
+        EnemyManager.getInstance().remove(enemy);
+        return objects.remove(enemy);
+    }
 }

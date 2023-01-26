@@ -40,11 +40,11 @@ public abstract class MovingGameObject extends GameObject {
     public void setMoveDirection(MoveDirection moveDirection) {
         this.moveDirectionBefore = this.moveDirection;
         this.moveDirection = moveDirection;
-        this.notifyObservers();
+        this.notifyPositionObservers();
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyPositionObservers() {
         for (PositionObserver observer : positionObservers) {
             observer.update(getX(), getY(), getMoveDirection());
         }

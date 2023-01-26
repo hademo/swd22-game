@@ -5,5 +5,5 @@ public interface PositionSubject {
 
     public void unregisterObserver(PositionObserver observer);
 
-    public void notifyObservers();
+    public void notifyPositionObservers();
 }

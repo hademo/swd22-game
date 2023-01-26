@@ -49,4 +49,7 @@ public class ProjectileFactory implements GameObjectFactory<Projectile> {
         return objects.toArray(objectArray);
     }
 
+    public boolean remove(Projectile projectile) {
+        return objects.remove(projectile);
+    }
 }

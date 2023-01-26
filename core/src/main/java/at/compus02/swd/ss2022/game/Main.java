@@ -16,6 +16,7 @@ import at.compus02.swd.ss2022.game.movement.FollowPlayerMovementStrategy;
 import at.compus02.swd.ss2022.game.movement.RandomMovementStrategy;
 import at.compus02.swd.ss2022.game.observers.position.EnemyPositionObserver;
 import at.compus02.swd.ss2022.game.observers.position.PlayerPositionObserver;
+import at.compus02.swd.ss2022.game.observers.position.PlayerStatsObserver;
 import at.compus02.swd.ss2022.logger.ConsoleLogger;
 import at.compus02.swd.ss2022.logger.Logger;
 import at.compus02.swd.ss2022.logger.UserInterfaceLogger;
@@ -25,7 +26,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -42,15 +42,13 @@ public class Main extends ApplicationAdapter {
 	private final float updatesPerSecond = 60;
 	private final float logicFrameTime = 1 / updatesPerSecond;
 	private float deltaAccumulator = 0;
-	private BitmapFont font;
 	private UserInterfaceLogger userInterfaceLogger;
+	private UserInterfaceLogger playerStatsLogger;
 	private Logger consoleLogger;
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		font = new BitmapFont();
-		font.setColor(Color.WHITE);
 		initTextures();
 		initLoggers();
 		initGameObjectsAndInput();
@@ -99,11 +97,10 @@ public class Main extends ApplicationAdapter {
 	}
 
 	private void initLoggers() {
-		final float UI_LOG_POSITION_X = -worldHeight / 2;
+		final float UI_LOG_POSITION_X = -worldWidth / 2;
 		final float UI_LOG_POSITION_Y = worldHeight / 2 - 5;
-		userInterfaceLogger = UserInterfaceLogger.getInstance();
-		userInterfaceLogger.setPositionX(UI_LOG_POSITION_X);
-		userInterfaceLogger.setPositionY(UI_LOG_POSITION_Y);
+		userInterfaceLogger = new UserInterfaceLogger(Color.WHITE, UI_LOG_POSITION_X, UI_LOG_POSITION_Y);
+		playerStatsLogger = new UserInterfaceLogger(Color.WHITE, 100, UI_LOG_POSITION_Y);
 
 		consoleLogger = ConsoleLogger.getInstance();
 	}
@@ -112,8 +109,10 @@ public class Main extends ApplicationAdapter {
 		Player player = PlayerFactory.getInstance().getObjects()[0];
 		PlayerPositionObserver playerPositionUIObserver = new PlayerPositionObserver(userInterfaceLogger);
 		PlayerPositionObserver playerPositionConsoleObserver = new PlayerPositionObserver(consoleLogger);
+		PlayerStatsObserver playerStatsObserver = new PlayerStatsObserver(playerStatsLogger);
 		player.registerObserver(playerPositionUIObserver);
 		player.registerObserver(playerPositionConsoleObserver);
+		player.registerObserver(playerStatsObserver);
 
 		Enemy enemy = EnemyFactory.getInstance().getObjects()[0];
 		EnemyPositionObserver enemyPositionConsoleObserver = new EnemyPositionObserver(consoleLogger);
@@ -142,6 +141,8 @@ public class Main extends ApplicationAdapter {
 			gameObject.draw(batch);
 		}
 		userInterfaceLogger.draw(batch);
+		playerStatsLogger.draw(batch);
+
 		batch.end();
 	}
 
